@@ -1,4 +1,4 @@
-# Vagrant SSH Exampl
+# Vagrant SSH Example
 
 > Neat trick passing vagrant ssh-config output into ssh command
 
