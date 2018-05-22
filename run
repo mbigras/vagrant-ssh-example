@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Build a virtual machine running ubuntu-16.04 with nginx
+# Plus cool vagrant ssh configuration
+# https://stackoverflow.com/a/23685489/2909897
+
+set -x
+
+ssh_config=$(mktemp)
+
+vagrant up > /dev/null
+vagrant ssh-config > $ssh_config
+
+ssh -F $ssh_config default sudo bash <<EOF
+	apt-get update -y
+	apt-get install -y nginx
+EOF
+
+ssh -F $ssh_config default bash <<EOF
+	curl -s localhost:80
+EOF
+
+vagrant destroy -f
